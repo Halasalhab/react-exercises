@@ -4,7 +4,7 @@ import colors from '../theme'
 
 const SearchContainer = styled.div`
   position: relative;
-  width: 360px; 
+  width: 100%; 
   margin-block: 1.5rem; 
 `
 const Input = styled.input`
@@ -16,7 +16,7 @@ const Input = styled.input`
 const SearchIcon = styled.img`
   position: absolute;
   width: 20px;
-  hight: 15px;
+  height: 17px;
   top: 50%;
   left: -2px;
   transform: translateY(-50%);
