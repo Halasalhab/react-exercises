@@ -1,8 +1,15 @@
 import React from 'react'
+import SearchInput from './SearchInput'
+import Card from './MemberCard'
 
-function SearchAndAddMembers() {
+function SearchAndAddMembers({members}) {
   return (
-    <div>SearchAndAddMembers</div>
+    <div>
+      <SearchInput />
+      {members?.length? members.map((member) =>{
+        return <Card key={member.id} member={member}/>
+      }): <p>No members found</p>}
+    </div>
   )
 }
 

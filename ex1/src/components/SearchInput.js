@@ -4,18 +4,21 @@ import colors from '../theme'
 
 const SearchContainer = styled.div`
   position: relative;
-  width: 300px; 
+  width: 360px; 
+  margin-block: 1.5rem; 
 `
 const Input = styled.input`
   width: 100%;
-  padding: 10px 30px 10px 10px;
+  padding: 10px 10px 10px 20px;
+  border: none;
   border-bottom: 1px solid ${colors.primary};
-  border-radius: 4px;
 `
 const SearchIcon = styled.img`
   position: absolute;
+  width: 20px;
+  hight: 15px;
   top: 50%;
-  right: 10px;
+  left: -2px;
   transform: translateY(-50%);
   cursor: pointer;
 `
