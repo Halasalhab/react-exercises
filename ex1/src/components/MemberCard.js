@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import colors from '../theme'
 
@@ -48,21 +48,20 @@ const RadioCheckBtn = styled.button`
   border-radius: 50%;
 `
 
-function Card({ member }) {
-
+function Card({ member, handelCheckMarkBtn }) {
   return (
     <MemberCard>
     {member.member ? (
       <>
         <AvatarIcon src='/icons/selected-user.png' />
         <SelectedMember>{member.name}</SelectedMember>
-        <SelectedIcon src='/icons/checkmark.svg' aria-hidden="true" role='button'/>
+        <SelectedIcon src='/icons/checkmark.svg' aria-hidden="true" role='button'onClick={() => handelCheckMarkBtn(member.id)}/>
       </>
     ) : (
       <>
         <AvatarIcon src='/icons/user.png' />
         <NotSelectedMember>{member.name}</NotSelectedMember>
-        <RadioCheckBtn />
+        <RadioCheckBtn onClick={() => handelCheckMarkBtn(member.id)}/>
       </>
     )}
   </MemberCard>
