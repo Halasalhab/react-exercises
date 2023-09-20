@@ -43,10 +43,6 @@ function Profile({ userData = data }) {
                 <i className="fa fa-user fa-5x" aria-hidden="true"></i>
               )}
             </div>
-            {/* <div className="make-profile"> */}
-              {/* {userData.me.Profile ? <UpdateProfile /> : <CreateProfile />} */}
-            {/* </div> */}
-
             <h3 className="name">{userData.me.name}</h3>
 
             {userData.me.Profile ? (
