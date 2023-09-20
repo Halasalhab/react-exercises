@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Profile from './pages/profile/profile';
+import Profile from './pages/profile';
 
 function App() {
   return (
