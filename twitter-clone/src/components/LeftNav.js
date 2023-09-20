@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "../styles/leftNav.css"
 import favIcon from "../styles/assets/logo-black.png.twimg.1920.png"
+import Tweet from "./Tweet"
 
 function LeftNav() {
 	return (
@@ -16,12 +17,7 @@ function LeftNav() {
 			</Link>
 			<Link>
 				<h2>
-					<i className="fa fa-user" aria-hidden="true" /> <span className="title">Profile</span>
-				</h2>
-			</Link>
-			<Link>
-				<h2>
-					<i className="fa fa-envelope" aria-hidden="true" /> <span className="title">Messages</span>
+					<i className="fa-solid fa-magnifying-glass" aria-hidden="true" /> <span className="title">Explore</span>
 				</h2>
 			</Link>
 			<Link>
@@ -31,9 +27,20 @@ function LeftNav() {
 			</Link>
 			<Link>
 				<h2>
+					<i className="fa fa-envelope" aria-hidden="true" /> <span className="title">Messages</span>
+				</h2>
+			</Link>
+			<Link>
+				<h2>
+					<i className="fa fa-user" aria-hidden="true" /> <span className="title">Profile</span>
+				</h2>
+			</Link>
+			<Link>
+				<h2>
 					<i className="fa fa-ellipsis-h" aria-hidden="true" /> <span className="title">More</span>
 				</h2>
 			</Link>
+			<Tweet/>
 		</div>
 	)
 }
