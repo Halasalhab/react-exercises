@@ -1,0 +1,45 @@
+.note-card {
+    border-radius: 5px;
+    border: 1px solid #F1F3F4;
+    background-color: #fff8b8;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.note-tilte {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.note-content {
+    font-size: 1.5rem;
+}
+
+.fa-trash {
+    color: grey;
+    cursor: 'pointer';
+    align-self: flex-end;
+    position: absolute;
+    top: 84%;
+}
+
+.note-date-creation {
+    background-color: hsla(0, 0%, 91%, 0.7); 
+    border-radius: 10px;
+    padding-inline: 5px;
+}
+
+.confirmation-dialog  button{
+    border: none;
+    background-color: transparent;
+    font-size: medium;
+}
+
+.confirmation-dialog  button:nth-child(2){
+    color: rgba(255, 0, 0, 0.578);
+}
