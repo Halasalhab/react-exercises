@@ -1,0 +1,13 @@
+.search-bar-wraper{
+    display: flex;
+    gap: 50px;
+    padding-inline: 30px;
+    padding-block: 15px;
+    border-bottom: 1px solid grey;
+}
+
+.search-bar-wraper p{
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+}

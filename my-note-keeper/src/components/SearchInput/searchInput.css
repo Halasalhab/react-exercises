@@ -1,0 +1,26 @@
+.container{
+    width:450px;
+    background-color: #F1F3F4;
+    border-radius: 5px;
+    position: relative;
+}
+
+.search-input{
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    padding-inline-start: 2.2rem;
+    border: none;
+    background-color: transparent;
+}
+
+.search-input:focus{
+    outline: 0;
+}
+
+.fa-magnifying-glass{
+    position: absolute;
+    top:50%;
+    color: grey;
+    margin-inline-start: 10px;
+}
