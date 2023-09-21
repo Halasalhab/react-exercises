@@ -1,0 +1,48 @@
+.create-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block: 1.5rem;
+}
+
+.create-note {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    width: 30%;
+    border: 2px solid rgb(210, 209, 209);
+    border-radius: 5px;
+    box-shadow: 0 0 20px 5px #F1F3F4;
+}
+
+.error {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+}
+
+.textarea, .title{
+    border: none;
+}
+
+.textarea, .title:focus{
+    outline: none;
+}
+
+.title{
+    margin-block-end: 10px;
+}
+
+.form-btns{
+    align-self: flex-end;
+}
+.form-btns button{
+    border: none;
+    background-color: transparent;
+    font-size: medium;
+    color: rgba(255, 0, 0, 0.578);
+}
+
+.form-btns button:first-child{
+    color:rgb(153, 215, 54);
+}
