@@ -13,9 +13,9 @@ function App() {
     fetchData();
   }, [notes]);
 
-  const fetchData = () => {
+  const fetchData = async () => {
     try {
-      axios.get('http://localhost:3001/notes').then((response) => {
+      await axios.get('http://localhost:3001/notes').then((response) => {
         setNotes(response.data);
         setLoading(false)
       })
@@ -34,6 +34,15 @@ function App() {
     }
   };
 
+  const deleteNote = async (noteId) => {
+    try {
+      await axios.delete(`http://localhost:3001/notes/${noteId}`);
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+    } catch (error) {
+      setError(error)
+    }
+  };
+
   if(loading) return <p className="loading">Loading</p> 
   if(error) return <p>Error, please try later</p> 
 
@@ -44,7 +53,7 @@ function App() {
       <TakeNote creatNote={creatNote}/>
       <div className="notes-container">
         {notes.length? notes.map((note, i)=>{
-          return <Note key={i} title={note.title} content={note.content} date={note.createdAt}/>
+          return <Note key={i} id={note._id} title={note.title} content={note.content} date={note.createdAt} deleteNote={deleteNote}/>
         }): <p>No Notes Found</p>}
       </div>
     </div>

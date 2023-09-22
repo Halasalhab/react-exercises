@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './note.css'
 
-export default function Note({ title, content, date }) {
+export default function Note({ id, title, content, date, deleteNote }) {
     const [showTrashIcon, setShowTrashIcon] = useState(false);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
     const originalDate = new Date(date);
@@ -27,6 +27,7 @@ export default function Note({ title, content, date }) {
     };
 
     const handleConfirmDelete = () => {
+        deleteNote(id);
         setShowConfirmationDialog(false);
     };
 
@@ -50,10 +51,12 @@ export default function Note({ title, content, date }) {
                 ></i>
             )}
             {showConfirmationDialog && (
-                <div className="confirmation-dialog">
+                <div className='dialog-wrapper'>
+                <div className="dialog confirmation-dialog">
                     <p>Are you sure you want to delete this note?</p>
                     <button onClick={handleConfirmDelete}>Delete</button>
-                    <button onClick={handleCancelDelete}>Close</button>
+                    <button onClick={handleCancelDelete}>Cancel</button>
+                </div>
                 </div>
             )}
         </div>

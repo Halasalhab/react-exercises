@@ -53,6 +53,15 @@ export default function TakeNote({creatNote}) {
         event.preventDefault();
     }
 
+    function handleCancel(e){
+        e.preventDefault();
+        setIsExpanded(false);
+        setNote({
+            title: "",
+            content: ""
+        });     
+    }
+
     return (
         <div className="create-area">
             <form className="create-note">
@@ -80,11 +89,8 @@ export default function TakeNote({creatNote}) {
                         <button onClick={submitNote}>
                             Done
                         </button>
-                        <button onClick={(e) => {
-                            e.preventDefault();
-                            setIsExpanded(false);
-                        }}>
-                            Close
+                        <button onClick={handleCancel}>
+                            Cancel
                         </button>
                     </div>
                 )}
