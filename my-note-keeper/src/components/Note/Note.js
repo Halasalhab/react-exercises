@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import './note.css'
 
-export default function Note({ id, title, content, date, deleteNote }) {
+export default function Note({ id, title, content, date, deleteNote, updateNote }) {
     const [showTrashIcon, setShowTrashIcon] = useState(false);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+    const [showEditDialog, setShowEditDialog] = useState(false);
+    const [note, setNote] = useState({
+        id: id,
+        title: title,
+        content: content,
+    });
     const originalDate = new Date(date);
-
-    // Extract the date components (year, month, day)
     const year = originalDate.getFullYear();
-    const month = String(originalDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1
+    const month = String(originalDate.getMonth() + 1).padStart(2, '0');
     const day = String(originalDate.getDate()).padStart(2, '0');
-
-    // Create the formatted date string
     const formattedDateString = `${year}-${month}-${day}`;
 
     const handleMouseEnter = () => {
@@ -34,6 +36,14 @@ export default function Note({ id, title, content, date, deleteNote }) {
     const handleCancelDelete = () => {
         setShowConfirmationDialog(false);
     };
+    const handleCancelEdit = (e) => {
+        setShowEditDialog(false);
+    };
+
+    const handleConfirmEdit = () => {
+        updateNote(note)
+        setShowEditDialog(false);
+    }
 
     return (
         <div
@@ -41,8 +51,12 @@ export default function Note({ id, title, content, date, deleteNote }) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <p className='note-tilte'>{title}</p>
-            <p className='note-content'>{content}</p>
+            <p className='note-tilte' onClick={() => {
+                setShowEditDialog(true);
+            }}>{title}</p>
+            <p className='note-content' onClick={() => {
+                setShowEditDialog(true);
+            }}>{content}</p>
             <time className='note-date-creation'>{formattedDateString}</time>
             {showTrashIcon && (
                 <i
@@ -52,11 +66,34 @@ export default function Note({ id, title, content, date, deleteNote }) {
             )}
             {showConfirmationDialog && (
                 <div className='dialog-wrapper'>
-                <div className="dialog confirmation-dialog">
-                    <p>Are you sure you want to delete this note?</p>
-                    <button onClick={handleConfirmDelete}>Delete</button>
-                    <button onClick={handleCancelDelete}>Cancel</button>
+                    <div className="dialog confirmation-dialog">
+                        <p>Are you sure you want to delete this note?</p>
+                        <div>
+                        <button onClick={handleConfirmDelete}>Delete</button>
+                        <button className='cancel-btn' onClick={handleCancelDelete}>Cancel</button>
+                        </div>
+                    </div>
                 </div>
+            )}
+            {showEditDialog && (
+                <div className='dialog-wrapper'>
+                    <div className="dialog">
+                        <input
+                            type="text"
+                            value={note.title}
+                            className="title"
+                            onChange={(e) => setNote({ ...note, title: e.target.value })}
+                        />
+                        <textarea
+                            className="textarea"
+                            value={note.content}
+                            onChange={(e) => setNote({ ...note, content: e.target.value })}
+                        />
+                        <div>
+                        <button onClick={handleConfirmEdit}>Done</button>
+                        <button className='cancel-btn' onClick={handleCancelEdit}>Cancel</button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

@@ -43,6 +43,22 @@ function App() {
     }
   };
 
+  const updateNote = async (note) =>{
+    try {
+      await axios.put(`http://localhost:3001/notes/${note.id}`, {title:note.title, content:note.content}).then((response)=>{
+        const updatedNote  = response.data;
+        const noteIndex = notes.findIndex((note) => note.noteID === note.id);
+        if (noteIndex !== -1) {
+          const updatedNotes = [...notes];
+          updatedNotes[noteIndex] = updatedNote;
+          setNotes(updatedNotes);
+        }
+      })
+    } catch (error) {
+      setError(error)
+    }
+  }
+
   if(loading) return <p className="loading">Loading</p> 
   if(error) return <p>Error, please try later</p> 
 
@@ -53,7 +69,7 @@ function App() {
       <TakeNote creatNote={creatNote}/>
       <div className="notes-container">
         {notes.length? notes.map((note, i)=>{
-          return <Note key={i} id={note._id} title={note.title} content={note.content} date={note.createdAt} deleteNote={deleteNote}/>
+          return <Note key={i} id={note._id} title={note.title} content={note.content} date={note.createdAt} deleteNote={deleteNote} updateNote={updateNote}/>
         }): <p>No Notes Found</p>}
       </div>
     </div>

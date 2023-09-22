@@ -34,12 +34,13 @@
     padding-inline: 5px;
 }
 
-.confirmation-dialog  button{
+.dialog button{
     border: none;
     background-color: transparent;
     font-size: medium;
 }
 
-.confirmation-dialog  button:nth-child(2){
+.cancel-btn{
     color: rgba(255, 0, 0, 0.578);
 }
+
