@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import './note.css'
 
-export default function Note() {
+export default function Note({ title, content, date }) {
     const [showTrashIcon, setShowTrashIcon] = useState(false);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+    const originalDate = new Date(date);
+
+    // Extract the date components (year, month, day)
+    const year = originalDate.getFullYear();
+    const month = String(originalDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so add 1
+    const day = String(originalDate.getDate()).padStart(2, '0');
+
+    // Create the formatted date string
+    const formattedDateString = `${year}-${month}-${day}`;
 
     const handleMouseEnter = () => {
         setShowTrashIcon(true);
@@ -31,9 +40,9 @@ export default function Note() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <p className='note-tilte'>Title</p>
-            <p className='note-content'>note</p>
-            <time className='note-date-creation'>21/8/2023</time>
+            <p className='note-tilte'>{title}</p>
+            <p className='note-content'>{content}</p>
+            <time className='note-date-creation'>{formattedDateString}</time>
             {showTrashIcon && (
                 <i
                     className="fa-solid fa-trash fa-lg"

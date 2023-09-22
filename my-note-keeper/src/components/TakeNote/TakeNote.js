@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import './takeNote.css'
 
-export default function TakeNote() {
+export default function TakeNote({creatNote}) {
 
     const [note, setNote] = useState({
         title: "",
         content: "",
-        date: ""
     });
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -21,7 +20,7 @@ export default function TakeNote() {
         setNote((prevNote) => {
             return {
                 ...prevNote,
-                [name]: value
+                [name]: value,
             };
         });
     }
@@ -44,6 +43,7 @@ export default function TakeNote() {
         if (note.title === "" || note.content === "") {
             showAlert();
         } else {
+            creatNote(note)
             setNote({
                 title: "",
                 content: ""
