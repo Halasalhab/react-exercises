@@ -24,41 +24,6 @@ function App() {
     }
   };
   
-  const creatNote = async (noteData) => {
-    try {
-      const response = await axios.post('http://localhost:3001/notes', noteData);
-      const newNote = response.data;
-      setNotes([...notes, newNote]);
-    } catch (error) {
-      setError(error)
-    }
-  };
-
-  const deleteNote = async (noteId) => {
-    try {
-      await axios.delete(`http://localhost:3001/notes/${noteId}`);
-      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
-    } catch (error) {
-      setError(error)
-    }
-  };
-
-  const updateNote = async (note) =>{
-    try {
-      await axios.put(`http://localhost:3001/notes/${note.id}`, {title:note.title, content:note.content}).then((response)=>{
-        const updatedNote  = response.data;
-        const noteIndex = notes.findIndex((note) => note.noteID === note.id);
-        if (noteIndex !== -1) {
-          const updatedNotes = [...notes];
-          updatedNotes[noteIndex] = updatedNote;
-          setNotes(updatedNotes);
-        }
-      })
-    } catch (error) {
-      setError(error)
-    }
-  }
-
   if(loading) return <p className="loading">Loading</p> 
   if(error) return <p>Error, please try later</p> 
 
@@ -66,10 +31,10 @@ function App() {
   return (
     <div className="App">
       <SearchBar />
-      <TakeNote creatNote={creatNote}/>
+      <TakeNote setError={setError} setNotes={setNotes} notes={notes}/>
       <div className="notes-container">
         {notes.length? notes.map((note, i)=>{
-          return <Note key={i} id={note._id} title={note.title} content={note.content} date={note.createdAt} deleteNote={deleteNote} updateNote={updateNote}/>
+          return <Note key={note._id} id={note._id} title={note.title} content={note.content} date={note.createdAt} setError={setError} setNotes={setNotes} notes={notes}/>
         }): <p>No Notes Found</p>}
       </div>
     </div>

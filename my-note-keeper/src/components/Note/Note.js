@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './note.css'
+import axios from "axios";
 
-export default function Note({ id, title, content, date, deleteNote, updateNote }) {
+export default function Note({ id, title, content, date, setNotes, setError, notes }) {
     const [showTrashIcon, setShowTrashIcon] = useState(false);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
     const [showEditDialog, setShowEditDialog] = useState(false);
@@ -45,6 +46,31 @@ export default function Note({ id, title, content, date, deleteNote, updateNote 
         setShowEditDialog(false);
     }
 
+    const deleteNote = async (noteId) => {
+        try {
+            await axios.delete(`http://localhost:3001/notes/${noteId}`);
+            setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+        } catch (error) {
+            setError(error)
+        }
+    };
+
+    const updateNote = async (note) => {
+        try {
+            await axios.put(`http://localhost:3001/notes/${note.id}`, { title: note.title, content: note.content }).then((response) => {
+                const updatedNote = response.data;
+                const noteIndex = notes.findIndex((note) => note.noteID === note.id);
+                if (noteIndex !== -1) {
+                    const updatedNotes = [...notes];
+                    updatedNotes[noteIndex] = updatedNote;
+                    setNotes(updatedNotes);
+                }
+            })
+        } catch (error) {
+            setError(error)
+        }
+    }
+
     return (
         <div
             className="note-card"
@@ -69,8 +95,8 @@ export default function Note({ id, title, content, date, deleteNote, updateNote 
                     <div className="dialog confirmation-dialog">
                         <p>Are you sure you want to delete this note?</p>
                         <div>
-                        <button onClick={handleConfirmDelete}>Delete</button>
-                        <button className='cancel-btn' onClick={handleCancelDelete}>Cancel</button>
+                            <button onClick={handleConfirmDelete}>Delete</button>
+                            <button className='cancel-btn' onClick={handleCancelDelete}>Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -90,8 +116,8 @@ export default function Note({ id, title, content, date, deleteNote, updateNote 
                             onChange={(e) => setNote({ ...note, content: e.target.value })}
                         />
                         <div>
-                        <button onClick={handleConfirmEdit}>Done</button>
-                        <button className='cancel-btn' onClick={handleCancelEdit}>Cancel</button>
+                            <button onClick={handleConfirmEdit}>Done</button>
+                            <button className='cancel-btn' onClick={handleCancelEdit}>Cancel</button>
                         </div>
                     </div>
                 </div>

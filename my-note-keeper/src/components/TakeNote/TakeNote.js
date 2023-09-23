@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import './takeNote.css'
+import axios from "axios";
 
-export default function TakeNote({creatNote}) {
+
+export default function TakeNote({notes, setNotes, setError}) {
 
     const [note, setNote] = useState({
         title: "",
@@ -9,6 +11,16 @@ export default function TakeNote({creatNote}) {
     });
 
     const [isExpanded, setIsExpanded] = useState(false);
+
+    const creatNote = async (noteData) => {
+        try {
+          const response = await axios.post('http://localhost:3001/notes', noteData);
+          const newNote = response.data;
+          setNotes([...notes, newNote]);
+        } catch (error) {
+          setError(error)
+        }
+    };
 
     function expand() {
         setIsExpanded(true);
