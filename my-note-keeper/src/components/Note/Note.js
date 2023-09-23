@@ -49,7 +49,7 @@ export default function Note({ id, title, content, date, setNotes, setError, not
     const deleteNote = async (noteId) => {
         try {
             await axios.delete(`http://localhost:3001/notes/${noteId}`);
-            setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+            setNotes((prevNotes) => prevNotes.filter((note) => note._id !== noteId));
         } catch (error) {
             setError(error)
         }

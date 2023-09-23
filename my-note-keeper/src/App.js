@@ -8,10 +8,11 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchResult, setSearchResult] = useState(null);
 
   useEffect(() => {
     fetchData();
-  }, [notes]);
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -27,13 +28,14 @@ function App() {
   if(loading) return <p className="loading">Loading</p> 
   if(error) return <p>Error, please try later</p> 
 
+  const displayedNotes = searchResult !== null ? searchResult : notes; 
 
   return (
     <div className="App">
-      <SearchBar />
+      <SearchBar setNotes={setNotes} setError={setError} notes={notes} setSearchResult={setSearchResult}/>
       <TakeNote setError={setError} setNotes={setNotes} notes={notes}/>
       <div className="notes-container">
-        {notes.length? notes.map((note, i)=>{
+        {displayedNotes.length? notes.map((note, i)=>{
           return <Note key={note._id} id={note._id} title={note.title} content={note.content} date={note.createdAt} setError={setError} setNotes={setNotes} notes={notes}/>
         }): <p>No Notes Found</p>}
       </div>
