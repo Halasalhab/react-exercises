@@ -4,6 +4,9 @@ import { Box, Container } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import CartItem from './CartItem';
 import Carousel from 'react-material-ui-carousel'
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import IconButton from '@mui/material/IconButton';
+
 
 export default function Cart({ cartItems, setCartItems, totalPrice }) {
     const [expanCart, setExpanCart] = useState(false);
@@ -56,7 +59,12 @@ export default function Cart({ cartItems, setCartItems, totalPrice }) {
                                         return <CartItem key={i} id={item.id} name={item.name} price={item.price} image={item.image} handelDeleteItem={handelDeleteItem} />
                                     })}
                             </Carousel>
+                            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1, justifyContent: 'space-between' }}>
                             <p>Total Price: {totalPrice}$</p>
+                                <IconButton aria-label="remove-from-cart">
+                                    <ShoppingCartCheckoutIcon />
+                                </IconButton>
+                            </Box>
                         </>) : <p>No Items Added To Cart</p>}
                 </Container>
             </Box>)}
