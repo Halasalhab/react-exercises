@@ -5,7 +5,19 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
-export default function ProdutCard({name, price, image}) {
+
+export default function ProdutCard({ id, name, price, image, cartItems, setCartItems }) {
+
+    const handelClick = () => {
+        const newItem = {
+            id: id,
+            name: name,
+            price: price,
+            image: image,
+        };
+        setCartItems([...cartItems, newItem]);
+    }
+
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
@@ -25,8 +37,8 @@ export default function ProdutCard({name, price, image}) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
-                    <AddShoppingCartSharpIcon/>
+                <Button size="small" color="primary" onClick={handelClick}>
+                    <AddShoppingCartSharpIcon />
                 </Button>
             </CardActions>
         </Card>

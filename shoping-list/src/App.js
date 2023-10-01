@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import './App.css';
 import Products from './pages/Products';
+import Cart from './components/Cart';
 
 function App() {
-  const [products, setProducts] = useState([{ name: 'Nike boots', price: '125', image: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/c90322f5-a798-4183-abf7-577dcb1ac860/city-classic-womens-boots-QTgPCN.png'}, { name: 'Nike boots', price: '125', image: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/c90322f5-a798-4183-abf7-577dcb1ac860/city-classic-womens-boots-QTgPCN.png' }, { name: 'Nike boots', price: '125', image: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/c90322f5-a798-4183-abf7-577dcb1ac860/city-classic-womens-boots-QTgPCN.png' }])
+  const [cartItems, setCartItems] = useState([]);
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce((total, item) => total + item.price, 0);
+  }, [cartItems]); 
+
   return (
     <>
-      <Products products={products}/>
+      <Cart cartItems={cartItems} setCartItems={setCartItems} totalPrice={totalPrice} />
+      <Products cartItems={cartItems} setCartItems={setCartItems} />
     </>
   );
 }
