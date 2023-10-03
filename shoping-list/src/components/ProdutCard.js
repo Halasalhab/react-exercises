@@ -1,12 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
+import { CartItemsContext } from '../CartContext';
 
-export default function ProdutCard({ id, name, price, image, cartItems, setCartItems }) {
+export default function ProdutCard({ id, name, price, image }) {
+    const {cartItems, setCartItems} = useContext(CartItemsContext);
 
     const handelClick = () => {
         const newItem = {

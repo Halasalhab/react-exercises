@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import { Box, Container } from '@mui/material';
 import Fab from '@mui/material/Fab';
@@ -6,10 +6,12 @@ import CartItem from './CartItem';
 import Carousel from 'react-material-ui-carousel'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import IconButton from '@mui/material/IconButton';
+import { CartItemsContext } from '../CartContext';
+import { Link } from 'react-router-dom';
 
-
-export default function Cart({ cartItems, setCartItems, totalPrice }) {
+export default function Cart({ totalPrice }) {
     const [expanCart, setExpanCart] = useState(false);
+    const {cartItems, setCartItems} = useContext(CartItemsContext);
 
     const handelClick = () => {
         setExpanCart(!expanCart);
@@ -62,7 +64,9 @@ export default function Cart({ cartItems, setCartItems, totalPrice }) {
                             <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1, justifyContent: 'space-between' }}>
                             <p>Total Price: {totalPrice}$</p>
                                 <IconButton aria-label="remove-from-cart">
+                                    <Link to={'/checkout'} style={{ textDecoration: 'none' }}>
                                     <ShoppingCartCheckoutIcon />
+                                    </Link>
                                 </IconButton>
                             </Box>
                         </>) : <p>No Items Added To Cart</p>}
